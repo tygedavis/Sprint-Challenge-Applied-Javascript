@@ -26,6 +26,7 @@ function createCard(data){
           imgContainer = document.createElement('div'),
           img = document.createElement('img'),
           authorsName = document.createElement('span');
+          //console.log("This is card", card)
 
     //Add Classes
     card.classList.add('card');
@@ -35,13 +36,14 @@ function createCard(data){
 
     //Organize Elements
     card.append(headline, author, authorsName);
-    authorsName.appendChild(imgContainer);
+    author.appendChild(imgContainer);
     imgContainer.appendChild(img);
 
     //Add Content
     headline.textContent = data.headline;
     img.src = data.authorPhoto;
     authorsName.textContent = `By ${data.authorName}`;
+    //console.log(img.src)
 
     return card;
 }
@@ -53,16 +55,17 @@ axios
     .then(res => {
         //console.log(res.data.articles);
         let obj = res.data.articles;
-        console.log("This is the boject ", obj);
+        //console.log("This is the boject ", obj);
         Object.entries(obj).forEach((entry) => {
-            console.log("This is our entry", entry);
-            const newCard = entry;
-            newCard.forEach((data, index) => {
-                console.log("This is our data with first index", data[1]);
+            //console.log("This is entry", entry[1]);
+                const indexOne = entry[1]
+                //console.log("This is indexOne", indexOne)
+                indexOne.map(data => {
+                    //console.log("This is .map", data);
+                    cardsContainer.appendChild(createCard(data))
+                })
             })
-            cardsContainer.appendChild(createCard(newCard));
         })
-    })
     .catch(err => {
         console.log(`The console threw an error: ${err}`);
     })
