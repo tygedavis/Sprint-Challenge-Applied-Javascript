@@ -48,12 +48,21 @@ function createCard(data){
 
 const cardsContainer = document.querySelector('.cards-container')
 
-
-
 axios
     .get('https://lambda-times-backend.herokuapp.com/articles')
     .then(res => {
-        console.log(res.data.articles);
-        const newCard = res.data.articles;
-        cardsContainer.appendChild(createCard(newCard))
+        //console.log(res.data.articles);
+        let obj = res.data.articles;
+        console.log("This is the boject ", obj);
+        Object.entries(obj).forEach((entry) => {
+            console.log("This is our entry", entry);
+            const newCard = entry;
+            newCard.forEach((data, index) => {
+                console.log("This is our data with first index", data[1]);
+            })
+            cardsContainer.appendChild(createCard(newCard));
+        })
+    })
+    .catch(err => {
+        console.log(`The console threw an error: ${err}`);
     })
