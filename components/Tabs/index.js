@@ -7,3 +7,23 @@
 //
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
+
+function(){
+    //Create Element
+    const tab = document.createElement('div');
+    //Add Classes to Element
+    tab.classList.add('tab');
+
+    return tab;
+}
+
+
+axios
+    .get('https://lambda-times-backend.herokuapp.com/topics')
+    .then(res => {
+        console.log(res.data.topics);
+        res.data.topcis.forEach( res => {
+            const newTopic
+        })
+            
+    })
